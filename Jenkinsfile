@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3-alpine'
+            image 'ceddy4395/windows-java'
             args '-v /root/.m2:/root/.m2'
         }
     }
