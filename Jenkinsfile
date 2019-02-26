@@ -1,4 +1,3 @@
-
 pipeline {
     agent any 
 
@@ -10,6 +9,12 @@ pipeline {
         }
         stage('Build Application Container') {
             steps {
+                echo 'Starting to build docker image'
+                def dockerfile = 'Dockerfile'
+                def buildid = '1.0'
+                def imagename = 'gmtest'
+                def customImage = docker.build("${imagename}:${buildid}", "-f ${dockerfile} ./dockerfiles")
+                customImage.push('latest')               
                 echo 'Built Container'               
             }
         }
