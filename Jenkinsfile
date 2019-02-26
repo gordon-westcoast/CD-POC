@@ -23,9 +23,11 @@ pipeline {
         stage('Update Test Environment') {
             steps {
                 echo 'Restarting target environment with new container'
+                            
                 script {
                     def targetMachine = 'bnwauto01'
-                    docker run --name pocimagecontainer --rm -it -h ${targetMachine} dockerwestcoast/pocimage
+                    powershell 'invoke-command -computer ${MachineName} -filepath "C:pocimagecontainer.ps1"'
+                 
                 }
                 echo 'Target environment container updated'
             }
