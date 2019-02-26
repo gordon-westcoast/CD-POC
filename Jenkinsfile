@@ -57,7 +57,6 @@ pipeline {
                 echo 'Starting BDD testing'   
                 }
                 echo 'Completed BDD testing'               
-            }
         }
     }
 }
