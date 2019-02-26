@@ -26,7 +26,7 @@ pipeline {
                             
                 script {
                     def targetMachine = 'bnwauto01'
-                    powershell '$password = "Westcoast6033"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer bnwauto01 -filepath "updatedockercontainer.ps1" -Credential $credential'
+                    powershell '$password = "Westcoast6033"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer bnwauto01 -filepath "updatedockercontainer.ps1" -Credential $credential
                  
                 }
                 echo 'Target environment container updated'
