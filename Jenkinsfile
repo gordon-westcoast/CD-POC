@@ -33,7 +33,7 @@ pipeline {
             }
         }
         stage('Ranorex Application Testing') {
-
+            steps {
                 echo 'Starting Ranorex application testing'
                 try{
                     bat ("Westcoast_Automation.exe /rc:createOPGOrder")
@@ -50,7 +50,7 @@ pipeline {
                     currentBuild.result = 'FAILURE'
                 }
                 echo 'Completed Ranorex application testing'
-          
+            }
         }
         stage('BDD Application Testing') {
             steps {
