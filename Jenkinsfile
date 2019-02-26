@@ -25,7 +25,7 @@ pipeline {
                 echo 'Restarting target environment with new container'
                 script {
                     def targetMachine = 'bnwauto01'
-                    powershell "invoke-command -computer ${targetMachine} -ScriptBlock {Get-EventLog system -Newest 50}"
+                    docker run --name pocimagecontainer --rm -it -h ${targetMachine} dockerwestcoast/pocimage
                 }
                 echo 'Target environment container updated'
             }
