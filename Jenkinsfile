@@ -56,9 +56,9 @@ pipeline {
         }
         stage('BDD Application Testing') {
             steps {
-                echo 'Starting BDD testing'   
-                }
-                echo 'Completed BDD testing'               
+                echo 'Starting BDD testing'
+                echo 'Completed BDD testing'  
+            }            
         }
     }
 }
