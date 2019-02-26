@@ -26,7 +26,7 @@ pipeline {
                             
                 script {
                     def targetMachine = 'bnwauto01'
-                    powershell 'invoke-command -computer bnwauto01 -filepath "C:pocimagecontainer.ps1"'
+                    powershell 'invoke-command -computer bnwauto01 -filepath "pocimagecontainer.ps1"'
                  
                 }
                 echo 'Target environment container updated'
