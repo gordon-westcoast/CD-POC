@@ -25,7 +25,7 @@ pipeline {
                 echo 'Restarting target environment with new container'
                 script {
                     def targetMachine = 'bnwauto01'
-                    powershell 'invoke-command -computer ${targetMachine} -filepath "C:\updatedockercontainer.ps1"'
+                    powershell 'invoke-command -computer bnwauto01 -filepath "C:\updatedockercontainer.ps1"'
                 }
                 echo 'Target environment container updated'
             }
