@@ -1,9 +1,6 @@
 
 pipeline {
-    agent {
-        docker {
-            image 'ceddy4395/windows-java'
-        }
+    agent any 
     }
 
     stages {
