@@ -35,19 +35,21 @@ pipeline {
         stage('Ranorex Application Testing') {
             steps {
                 echo 'Starting Ranorex application testing'
-                try{
-                    bat ("Westcoast_Automation.exe /rc:createOPGOrder")
-                    echo "Success - Prepare report"
-                    echo "buildnumber is ${BUILD_NUMBER}"
-                    step([$class: 'JUnitResultArchiver', allowEmptyResults: true, keepLongStdio: true, testResults: 'Reports\\myApp_Report_${BUILD_NUMBER}.rxlog.junit.xml'])            
-                    archiveArtifacts 'Reports\\myApp_Report_${BUILD_NUMBER}.rxzlog'            
-                }
-                catch (Exception err)
-                {
-                    echo "Execution Error: ${err}"            
-                    archiveArtifacts 'Reports\\myApp_Report_${BUILD_NUMBER}.*'
-                    mail to: 'gordon.marsh@westcoast.co.uk', subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Test Failed ${env.BUILD_URL}"
-                    currentBuild.result = 'FAILURE'
+                script {
+                    try{
+                        bat ("Westcoast_Automation.exe /rc:createOPGOrder")
+                        echo "Success - Prepare report"
+                        echo "buildnumber is ${BUILD_NUMBER}"
+                        step([$class: 'JUnitResultArchiver', allowEmptyResults: true, keepLongStdio: true, testResults: 'Reports\\myApp_Report_${BUILD_NUMBER}.rxlog.junit.xml'])            
+                        archiveArtifacts 'Reports\\myApp_Report_${BUILD_NUMBER}.rxzlog'            
+                   }
+                    catch (Exception err)
+                    {
+                        echo "Execution Error: ${err}"            
+                        archiveArtifacts 'Reports\\myApp_Report_${BUILD_NUMBER}.*'
+                        mail to: 'gordon.marsh@westcoast.co.uk', subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Test Failed ${env.BUILD_URL}"
+                        currentBuild.result = 'FAILURE'
+                    }
                 }
                 echo 'Completed Ranorex application testing'
             }
