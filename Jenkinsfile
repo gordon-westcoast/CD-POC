@@ -20,9 +20,12 @@ pipeline {
                 echo 'Built Container'               
             }
         }
-        stage('Deploy Application Container to Test Environment') {
+        stage('Update Test Environment') {
             steps {
-                echo 'Deployed container'      
+                echo 'Restarting target environment with new container'
+                def targetMachine = 'bnwauto01'
+                powershell "invoke-command -computer ${targetMachine} -filepath "C:\updatedockercontainer.ps1""
+                echo 'Target environment container updated'
             }
         }
         stage('Test Application') {
