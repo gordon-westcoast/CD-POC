@@ -32,9 +32,31 @@ pipeline {
                 echo 'Target environment container updated'
             }
         }
-        stage('Test Application') {
+        stage('Ranorex Application Testing') {
             steps {
-                echo 'Tested application'
+                echo 'Starting Ranorex application testing'
+                try{
+                    bat ("C:\RanorexAutomationBuild\Westcoast_Automation_POC\bin\Debug\Westcoast_Automation.exe /rc:createOPGOrder")
+                    echo "Success - Prepare report"
+                    echo "buildnumber is ${BUILD_NUMBER}"
+                    step([$class: 'JUnitResultArchiver', allowEmptyResults: true, keepLongStdio: true, testResults: 'Reports\\myApp_Report_${BUILD_NUMBER}.rxlog.junit.xml'])            
+                    archiveArtifacts 'Reports\\myApp_Report_${BUILD_NUMBER}.rxzlog'            
+                }
+                catch (Exception err)
+                {
+                    echo "Execution Error: ${err}"            
+                    archiveArtifacts 'Reports\\myApp_Report_${BUILD_NUMBER}.*'
+                    mail to: 'gordon.marsh@westcoast.co.uk', subject: "Failed Pipeline: ${currentBuild.fullDisplayName}", body: "Test Failed ${env.BUILD_URL}"
+                    currentBuild.result = 'FAILURE'
+                }
+                echo 'Completed Ranorex application testing'
+            }
+        }
+        stage('BDD Application Testing') {
+            steps {
+                echo 'Starting BDD testing'   
+                }
+                echo 'Completed BDD testing'               
             }
         }
     }
