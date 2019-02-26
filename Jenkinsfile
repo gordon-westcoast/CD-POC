@@ -13,7 +13,7 @@ pipeline {
                 script {
                     def dockerfile = 'Dockerfile'
                     def buildid = '1.0'
-                    def imagename = 'gmtest'
+                    def imagename = 'dockerwestcoast/pocimage'
                     def customImage = docker.build("${imagename}:${buildid}")
                     customImage.push('latest')       
                 }
