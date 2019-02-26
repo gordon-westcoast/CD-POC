@@ -14,7 +14,7 @@ pipeline {
                     def dockerfile = 'Dockerfile'
                     def buildid = '1.0'
                     def imagename = 'gmtest'
-                    def customImage = docker.build("${imagename}:${buildid}", "-f ${dockerfile}")
+                    def customImage = docker.build("${imagename}:${buildid}")
                     customImage.push('latest')       
                 }
                 echo 'Built Container'               
