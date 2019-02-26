@@ -26,7 +26,7 @@ pipeline {
                             
                 script {
                     def targetMachine = 'bnwauto01'
-                    powershell 'invoke-command -computer bnwauto01 -filepath "updatedockercontainer.ps1"'
+                    powershell 'invoke-command -computer bnwauto01 -filepath "updatedockercontainer.ps1" -Credential Administrator'
                  
                 }
                 echo 'Target environment container updated'
