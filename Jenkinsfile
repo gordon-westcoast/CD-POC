@@ -23,8 +23,10 @@ pipeline {
         stage('Update Test Environment') {
             steps {
                 echo 'Restarting target environment with new container'
-                def targetMachine = 'bnwauto01'
-                powershell 'invoke-command -computer ${targetMachine} -filepath "C:\updatedockercontainer.ps1"'
+                script {
+                    def targetMachine = 'bnwauto01'
+                    powershell "invoke-command -computer ${targetMachine} -filepath "C:\updatedockercontainer.ps1""
+                }
                 echo 'Target environment container updated'
             }
         }
