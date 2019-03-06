@@ -1,4 +1,4 @@
-pipeline {
+ pipeline {
     agent any 
 
     stages {
@@ -19,7 +19,7 @@ pipeline {
                                             local: 'master', 
                                             remote: "http://subversion.westcoast.co.uk/svn/jbatools/trunk/OPG"]], 
                             workspaceUpdater: [$class: 'UpdateUpdater']])               
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn -B -DskipTests -Dresume=false release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true" -f ./master/pom.xml clean package'
             }
         }
         stage('Build Application Container') {
