@@ -4,6 +4,21 @@ pipeline {
     stages {
         stage('Build Application') {
             steps {
+                checkout([$class: 'SubversionSCM', 
+                            additionalCredentials: [], 
+                            excludedCommitMessages: '', 
+                            excludedRegions: '', 
+                            excludedRevprop: '', 
+                            excludedUsers: '', 
+                            filterChangelog: false, 
+                            ignoreDirPropChanges: false, 
+                            includedRegions: '', 
+                            locations: [[credentialsId: '6aa59311-7c37-40f1-b50b-adf801abd30a', 
+                                            depthOption: 'infinity', 
+                                            ignoreExternalsOption: true, 
+                                            local: 'master', 
+                                            remote: "http://subversion.westcoast.co.uk/svn/jbatools/trunk/OPG"]], 
+                            workspaceUpdater: [$class: 'UpdateUpdater']])               
                 sh 'mvn -B -DskipTests clean package'
             }
         }
