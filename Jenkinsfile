@@ -23,7 +23,7 @@
                 sh 'mvn -B -DskipTests -Dresume=false release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true" -f ./master/pom.xml clean package'
             }
         }
-        stage('Build Application Container') {
+        stage('Build Application Image') {
             steps {
                 echo 'Starting to build docker image'
                 script {
