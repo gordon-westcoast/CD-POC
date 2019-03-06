@@ -48,7 +48,7 @@
                 echo 'Target environment container updated'
             }
         }
-        stage('Ranorex Application Testing') {
+        stage('Ranorex Smoke Testing') {
             steps {
                 echo 'Starting Ranorex application testing'
                 script {
