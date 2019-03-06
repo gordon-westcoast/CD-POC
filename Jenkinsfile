@@ -13,7 +13,7 @@ pipeline {
                             filterChangelog: false, 
                             ignoreDirPropChanges: false, 
                             includedRegions: '', 
-                            locations: [[credentialsId: '6aa59311-7c37-40f1-b50b-adf801abd30a', 
+                            locations: [[credentialsId: 'ef4c9d1a-232e-4e7d-8a68-eadf1f756355', 
                                             depthOption: 'infinity', 
                                             ignoreExternalsOption: true, 
                                             local: 'master', 
