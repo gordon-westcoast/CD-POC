@@ -23,25 +23,20 @@ pipeline {
                 sh 'mvn -B -f ./master/pom.xml clean install -P test package'
             }
         }
-        stage('Build Application Image') {
+        stage('Build & Publish Docker Image') {
             steps {
                 echo 'Starting to build docker image'
                 script {
                     def dockerfile = 'Dockerfile'
                     def buildid = '1.0'
                     def imagename = 'dockerwestcoast/pocimage'
-                    def customImage = docker.build("${imagename}:${buildid}")   
+                    def customImage = docker.build("${imagename}:${buildid}") 
+                    echo 'Docker image built'
+                    echo 'Starting to publish new Docker image'            
+                    customImage.push('latest')
+                    customImage.push("${buildid}") 
                 }
-                echo 'Built Container'               
-            }
-        }
-        stage('Publish Docker Image') {
-            steps {
-                echo 'Publishing to DockerHub'
-                script {
-                    customImage.push('latest') 
-                }
-            echo 'Published to DockerHub'
+                echo 'Docker image published'               
             }
         }
         stage('Update Test Environment') {
