@@ -60,7 +60,7 @@ pipeline {
                 echo 'Starting Ranorex application testing'
                 script {
                     try{
-                        bat (".\Ranorex\Westcoast_Automation.exe /rc:createOPGOrder")
+                        bat (".\\Ranorex\\Westcoast_Automation.exe /rc:createOPGOrder")
                         echo "Success - Prepare report"
                         echo "buildnumber is ${BUILD_NUMBER}"
                         step([$class: 'JUnitResultArchiver', allowEmptyResults: true, keepLongStdio: true, testResults: 'Reports\\myApp_Report_${BUILD_NUMBER}.rxlog.junit.xml'])            
