@@ -41,8 +41,8 @@
                 echo 'Restarting target environment with new container'
                             
                 script {
-                    def targetMachine = 'bnwauto01'
-                    powershell '$password = "Westcoast6033"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer bnwauto01 -filepath "updatedockercontainer.ps1" -Credential $credential'
+                    def targetMachine = 'bnwci01'
+                    powershell '$password = "Westcoast6033"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath "updatedockercontainer.ps1" -Credential $credential'
                  
                 }
                 echo 'Target environment container updated'
