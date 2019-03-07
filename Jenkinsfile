@@ -19,7 +19,7 @@
                                             ignoreExternalsOption: true, 
                                             local: 'master', 
                                             remote: "http://subversion.westcoast.co.uk/svn/jbatools/trunk/OPG"]], 
-                            workspaceUpdater: [$class: 'UpdateUpdater']])               
+                            workspaceUpdater: [$class: 'hudson.scm.subversion.UpdateWithCleanUpdater']])               
                 sh 'mvn -B -DskipTests -Dresume=false release:prepare release:perform -Darguments="-Dmaven.javadoc.skip=true" -f ./master/pom.xml clean package'
             }
         }
