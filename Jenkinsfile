@@ -30,10 +30,18 @@ pipeline {
                     def dockerfile = 'Dockerfile'
                     def buildid = '1.0'
                     def imagename = 'dockerwestcoast/pocimage'
-                    def customImage = docker.build("${imagename}:${buildid}")
-                    customImage.push('latest')       
+                    def customImage = docker.build("${imagename}:${buildid}")   
                 }
                 echo 'Built Container'               
+            }
+        }
+        stage('Publish Docker Image') {
+            steps {
+                echo 'Publishing to DockerHub'
+                script {
+                    customImage.push('latest') 
+                }
+            echo 'Published to DockerHub'
             }
         }
         stage('Update Test Environment') {
@@ -52,7 +60,7 @@ pipeline {
                 echo 'Starting Ranorex application testing'
                 script {
                     try{
-                        bat ("Westcoast_Automation.exe /rc:createOPGOrder")
+                        bat (".\Ranorex\Westcoast_Automation.exe /rc:createOPGOrder")
                         echo "Success - Prepare report"
                         echo "buildnumber is ${BUILD_NUMBER}"
                         step([$class: 'JUnitResultArchiver', allowEmptyResults: true, keepLongStdio: true, testResults: 'Reports\\myApp_Report_${BUILD_NUMBER}.rxlog.junit.xml'])            
