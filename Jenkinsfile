@@ -55,7 +55,7 @@ pipeline {
                 echo 'Starting Ranorex application testing'
                 script {
                     try{
-                        bat (".\\Ranorex\\AQA_CD_Test.exe /rc:SimpleRun /reportfile:'Ranorex\Reports\Report.rxlog'")
+                        bat (".\\Ranorex\\AQA_CD_Test.exe /rc:SimpleRun /reportfile:'Ranorex\\Reports\\Report.rxlog'")
                         echo "Success - Prepare report"
                         echo "buildnumber is ${BUILD_NUMBER}"
                         //step([$class: 'JUnitResultArchiver', allowEmptyResults: true, keepLongStdio: true, testResults: 'Reports\\AQA_CD_Test_${BUILD_NUMBER}.rxlog.junit.xml'])            
