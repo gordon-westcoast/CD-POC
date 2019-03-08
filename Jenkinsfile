@@ -75,6 +75,7 @@ pipeline {
         stage('BDD Application Testing') {
             steps {
                 echo 'Starting BDD testing'
+                sh 'mvn -B clean install'
                 echo 'Completed BDD testing'  
             }            
         }
