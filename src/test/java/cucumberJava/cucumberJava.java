@@ -11,20 +11,20 @@ import cucumber.api.java.en.When;
 public class cucumberJava {
     WebDriver driver = null;
 
-    @Given("^I have open the browser$")
+    @Given("^I have opened the browser$")
     public void openBrowser() {
         System.setProperty("webdriver.gecko.driver", "C:\\install\\geckodriver.exe");
         driver = new FirefoxDriver();
     }
 
-    @When("^I open Facebook website$")
-    public void goToFacebook() {
-        driver.navigate().to("https://www.facebook.com/");
+    @When("^I navigate to the home page$")
+    public void goToHomePage() {
+        driver.navigate().to("http://bnwci01.westcoast.co.uk/");
     }
 
-    @Then("^Login button should exist$")
+    @Then("^The header label should exist$")
     public void loginButton() {
-        if(driver.findElement(By.id("u_0_v")).isEnabled()) {
+        if(driver.findElement(By.cssSelector("html body nav.navbar.navbar-inverse.navbar-fixed-top div.container div.navbar-header a.navbar-brand")).isEnabled()) {
             System.out.println("Test 1 Pass");
         } else {
             System.out.println("Test 1 Fail");
