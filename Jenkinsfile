@@ -44,8 +44,8 @@ pipeline {
                 echo 'Restarting target environment with new container'
                             
                 script {
-                    //powershell '$targetMachine = "bnwci01"; $password = "Westcoast6034"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -Credential $credential -AsJob'
-                    powershell '$targetMachine = "bnwci01"; $password = "Westcoast6034"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -AsJob'
+                    powershell '$targetMachine = "bnwci01"; $password = "Westcoast952"; $username = "automation.test1"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -Credential $credential -AsJob'
+                    //powershell '$targetMachine = "bnwci01"; $password = "Westcoast6034"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -AsJob'
                 }
                 echo 'Target environment container updated'
             }
