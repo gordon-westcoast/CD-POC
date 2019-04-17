@@ -48,6 +48,7 @@ pipeline {
                     //powershell '$targetMachine = "bnwci01"; $password = "Westcoast6034"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -AsJob'
                     //powershell 'New-Item -Path "C:/" -Name "testfile1.txt" -ItemType "file" -Value "This is a text string." '
                     //powershell 'invoke-command -computer "bnwci01" -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -AsJob'
+                    powershell 'Invoke-Command -ComputerName "bnwci01" -ScriptBlock { docker login -u dockerwestcoast -p WeStCoAsT123 }' 
                     powershell 'Invoke-Command -ComputerName "bnwci01" -ScriptBlock { docker pull dockerwestcoast/pocimage }'
                     powershell 'Invoke-Command -ComputerName "bnwci01" -ScriptBlock { docker stop opg1 }'
                     powershell 'Invoke-Command -ComputerName "bnwci01" -ScriptBlock { docker rm opg1 }'
