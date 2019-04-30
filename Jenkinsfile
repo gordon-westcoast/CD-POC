@@ -44,11 +44,15 @@ pipeline {
                 echo 'Restarting target environment with new container'
                             
                 script {
-                    //powershell '$targetMachine = "bnwci01"; $password = "Westcoast952"; $username = "automation.test1"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -Credential $credential -AsJob'
-                    //powershell '$targetMachine = "bnwci01"; $password = "Westcoast6034"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -AsJob'
-                    //powershell 'New-Item -Path "C:/" -Name "testfile1.txt" -ItemType "file" -Value "This is a text string." '
-                    powershell '$password = "Westcoast952"; $username = "automation.test1"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password; Invoke-Command -ComputerName bnwci01 -FilePath .\\InstallFiles\\updatedockercontainer.ps1 -Credential $credential'
-                    //powershell '$password = "Westcoast952"; $username = "automation.test1"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password; Invoke-Command -ComputerName "bnwci01" -ScriptBlock { docker login -u dockerwestcoast -p WeStCoAsT123; docker pull dockerwestcoast/pocimage; docker stop opg1; docker rm opg1; docker run -p 8080:8080 --name opg1 -d dockerwestcoast/pocimage }'                 
+                    try{
+                        //powershell '$targetMachine = "bnwci01"; $password = "Westcoast952"; $username = "automation.test1"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -Credential $credential -AsJob'
+                        //powershell '$targetMachine = "bnwci01"; $password = "Westcoast6034"; $username = "gordon.marsh@westcoast.co.uk"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password;  invoke-command -computer $targetMachine -filepath ".\\InstallFiles\\updatedockercontainer.ps1" -AsJob'
+                        //powershell 'New-Item -Path "C:/" -Name "testfile1.txt" -ItemType "file" -Value "This is a text string." '
+                        powershell '$password = "Westcoast952"; $username = "automation.test1"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password; Invoke-Command -ComputerName bnwci01 -FilePath .\\InstallFiles\\updatedockercontainer.ps1 -Credential $credential'
+                        //powershell '$password = "Westcoast952"; $username = "automation.test1"; $password = ConvertTo-SecureString -String $password -AsPlainText -Force; $credential = New-Object System.Management.Automation.PSCredential -argumentlist $username, $password; Invoke-Command -ComputerName "bnwci01" -ScriptBlock { docker login -u dockerwestcoast -p WeStCoAsT123; docker pull dockerwestcoast/pocimage; docker stop opg1; docker rm opg1; docker run -p 8080:8080 --name opg1 -d dockerwestcoast/pocimage }'                 
+                    }
+                    catch (Exception err)
+                    {}
                 }
                 echo 'Target environment container updated'
             }
