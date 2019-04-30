@@ -60,6 +60,7 @@ pipeline {
         stage('Ranorex Smoke Testing') {
             steps {
                 echo 'Starting Ranorex application testing'
+                sleep 180 // Seconds
                 script {
                     try{
                         bat (".\\Ranorex\\AQA_CD_Test.exe /rc:SimpleRun /reportfile:Ranorex\\Reports\\Report.rxlog")
